@@ -25,6 +25,9 @@ import com.npisistemas.brewer.controller.CervejasController;
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware{
 	private ApplicationContext applicationContext;
 	
+	@SuppressWarnings("unused")
+	private String version = "1.03";
+	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;

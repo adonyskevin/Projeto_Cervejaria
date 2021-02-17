@@ -19,6 +19,8 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.npisistemas.brewer.controller.CervejasController;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 @Configuration
 @ComponentScan(basePackageClasses = {CervejasController.class})
 @EnableWebMvc
@@ -26,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	private ApplicationContext applicationContext;
 	
 	@SuppressWarnings("unused")
-	private String version = "1.03";
+	private String version = "1.04";
 	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -38,6 +40,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setEnableSpringELCompiler(true);
 		engine.setTemplateResolver(templateResolver());
+		
+		engine.addDialect(new LayoutDialect());
+		
 		return engine;
 	}
 	

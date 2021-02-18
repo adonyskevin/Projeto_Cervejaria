@@ -28,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	private ApplicationContext applicationContext;
 	
 	@SuppressWarnings("unused")
-	private String version = "1.04";
+	private String version = "1.05";
 	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

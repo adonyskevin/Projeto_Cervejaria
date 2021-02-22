@@ -27,9 +27,6 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware{
 	private ApplicationContext applicationContext;
 	
-	@SuppressWarnings("unused")
-	private String version = "1.05";
-	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;

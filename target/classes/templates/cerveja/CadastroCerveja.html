@@ -4,7 +4,9 @@
     xmlns:th = "http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="'layout/LayoutPadrao'">
-<head></head>
+<head>
+	<title>Cadastro de Cerveja</title>
+</head>
 <body>	
 <section layout:fragment="conteudo">
 	<div class="page-header">
@@ -14,14 +16,7 @@
 	</div>
 	
 	<div class="container-fluid">
-		
-		<!-- 
-		<div class="alert  alert-danger  alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<i class="fa  fa-exclamation-circle"></i> Já existe um produto com o nome informado.
-		</div>
-		 -->
-		 
+
 		<form method = "POST" th:object = "${cerveja}" class="form-vertical  js-form-loading">
 			
 			<div class="row">

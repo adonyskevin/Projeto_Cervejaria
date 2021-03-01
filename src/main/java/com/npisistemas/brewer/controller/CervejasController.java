@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.npisistemas.brewer.model.Cerveja;
+import com.npisistemas.brewer.model.Cidade;
 import com.npisistemas.brewer.model.Cliente;
+import com.npisistemas.brewer.model.Estilo;
 import com.npisistemas.brewer.model.Usuario;
 
 @Controller
@@ -30,6 +32,16 @@ public class CervejasController {
 	@RequestMapping("/usuarios/novo")
 	public String novo(Usuario usuario){
 		return "usuario/CadastroUsuario";
+	}
+	
+	@RequestMapping("/cidades/novo")
+	public String novo(Cidade cidade){
+		return "endereco/CadastroCidade";
+	}
+	
+	@RequestMapping("/estilos/novo")
+	public String novo(Estilo estilo){
+		return "estilo/CadastroEstilo";
 	}
 
 	// Apesar de ser o mesmo URL, estamos chamando pelo método POST, então teremos uma view diferente
@@ -71,6 +83,32 @@ public class CervejasController {
 		attributes.addFlashAttribute("mensagem", "Usuario salvo com sucesso!");
 		//Método Redirect faz uma nova requisição e começa novamente
 		return "redirect:/usuarios/novo";
+	}
+	
+	@RequestMapping(value = "/cidades/novo", method = RequestMethod.POST)
+	public String cadastrar(@Valid Cidade cidade, BindingResult result, Model model, RedirectAttributes attributes){
+		if (result.hasErrors()){
+			return novo(cidade);
+		}
+		
+		//Salvar no banco
+		
+		attributes.addFlashAttribute("mensagem", "Cidade salva com sucesso!");
+		//Método Redirect faz uma nova requisição e começa novamente
+		return "redirect:/cidades/novo";
+	}
+	
+	@RequestMapping(value = "/estilos/novo", method = RequestMethod.POST)
+	public String cadastrar(@Valid Estilo estilo, BindingResult result, Model model, RedirectAttributes attributes){
+		if (result.hasErrors()){
+			return novo(estilo);
+		}
+		
+		//Salvar no banco
+		
+		attributes.addFlashAttribute("mensagem", "Estilo salvo com sucesso!");
+		//Método Redirect faz uma nova requisição e começa novamente
+		return "redirect:/estilos/novo";
 	}
 	
 }

@@ -55,6 +55,10 @@ public class Estilo implements Serializable{
 	public Long getcodigo() {
 		return codigo;
 	}
+	
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNome() {
 		return nome;

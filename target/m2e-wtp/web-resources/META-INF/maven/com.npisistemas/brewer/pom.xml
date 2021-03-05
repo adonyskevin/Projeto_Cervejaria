@@ -19,20 +19,14 @@
 		
 		
 		<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
-		
 		<servlet.version>3.1.0</servlet.version>
-		
 		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
-		
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-		
 		<thymeleaft-layout-dialect.version>2.0.0</thymeleaft-layout-dialect.version>
-		
 		<log4j.version>2.6</log4j.version>
-		
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
-		
-		<hibernate.version>5.1.0.Final</hibernate.version>		
+		<hibernate.version>5.1.0.Final</hibernate.version>
+		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>		
 	</properties>
 	
 	<build>
@@ -165,6 +159,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Spring Data JPA -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
 		</dependency>
 		
 	</dependencies>

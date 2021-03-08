@@ -14,17 +14,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.npisistemas.brewer.model.Cerveja;
 import com.npisistemas.brewer.model.Origem;
 import com.npisistemas.brewer.model.Sabor;
-import com.npisistemas.brewer.repository.Cervejas;
 import com.npisistemas.brewer.repository.Estilos;
+import com.npisistemas.brewer.service.CadastroCervejaService;
 
 @Controller
 public class CervejasController {
 	
 	@Autowired
-	Cervejas cervejas;
+	private CadastroCervejaService cadastroCervejaService;
 	
 	@Autowired
-	Estilos estilos;
+	private Estilos estilos;
 	
 	@RequestMapping("/cervejas/novo")
 	public ModelAndView novo(Cerveja cerveja) {
@@ -37,16 +37,12 @@ public class CervejasController {
 	
 	@RequestMapping(value = "/cervejas/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-//		if (result.hasErrors()) {
-//			return novo(cerveja);
-//		}
+		if (result.hasErrors()) {
+			return novo(cerveja);
+		}
 		
-		// Salvar no banco de dados...
+		cadastroCervejaService.salvar(cerveja);
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
-		System.out.println(">>> sku: " + cerveja.getSku());
-		System.out.println(">>> nome: " + cerveja.getNome());
-		System.out.println(">>> estilo: " + cerveja.getEstilo());
-		System.out.println(">>> sabor: " + cerveja.getSabor());
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	

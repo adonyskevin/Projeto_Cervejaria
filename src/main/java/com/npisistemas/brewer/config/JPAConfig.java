@@ -1,4 +1,4 @@
-package com.npisistemas.brewer.config.init;
+package com.npisistemas.brewer.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -13,12 +13,14 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.npisistemas.brewer.model.Cerveja;
 import com.npisistemas.brewer.repository.Cervejas;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = Cervejas.class)
+@EnableJpaRepositories(basePackageClasses = Cervejas.class, enableDefaultTransactions = false)
+@EnableTransactionManagement
 public class JPAConfig {
 	
 	@Bean

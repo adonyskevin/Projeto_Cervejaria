@@ -19,7 +19,7 @@ public class Estilo implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	public Long codigo;
 
 	@NotBlank(message = "Informe o nome do estilo")
 	private String nome;

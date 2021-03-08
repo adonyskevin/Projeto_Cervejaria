@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.npisistemas.brewer.validation.SKU;
+
 @Entity
 @Table(name="cerveja")
 public class Cerveja {
@@ -23,6 +25,7 @@ public class Cerveja {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	@SKU
 	@NotBlank(message = "Informe o SKU")
 	private String sku;
 	

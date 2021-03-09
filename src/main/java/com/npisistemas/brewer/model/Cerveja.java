@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -32,29 +36,40 @@ public class Cerveja {
 	@NotBlank(message = "Informe o nome")
 	private String nome;
 	
-	@Size(max = 50, min = 5, message = "A descrição deve ter entre 5 e 50 caracteres")
+	@NotBlank(message = "Informe a descrição")
+	@Size(max = 50, min = 1, message = "A descrição deve ter entre 1 e 50 caracteres")
 	private String descricao;
 	
+	@NotNull(message = "Informe o valor")
+	@DecimalMin(value = "0.01", message = "O valor não deve ser maior que R$ 0,01")
+	@DecimalMax(value = "9999999.99", message = "O valor não deve ser maior que R$ 9.999.999,99")
 	private BigDecimal valor;
 	
+	@DecimalMax(value = "100", message = "O teor alcoólico não pode ser maior que 100%")
 	@Column(name = "teor_alcoolico")
 	private BigDecimal teorAlcoolico;
 	
+	@NotNull(message = "Informe a comissão")
+	@DecimalMax(value = "100", message = "A comissão não pode ser maior que 100%")
 	private BigDecimal comissao;
 	
+	@NotNull(message = "Informe o estilo")
 	@ManyToOne
 	@JoinColumn(name = "codigo_estilo")
 	private Estilo estilo;
 	
+	@NotNull(message = "Informe a quantidade em estoque")
+	@Max(value = 9999, message = "A quantidade em estoque não pode ser maior que 9.999")
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
 	
+	@NotNull(message = "Informe a origem")
 	@Enumerated(EnumType.STRING)
 	private Origem origem;
 	
+	@NotNull(message = "Informe o sabor")
 	@Enumerated(EnumType.STRING)
 	private Sabor sabor;
-	
 	
 // GETTERS AND SETTERS	
 	
@@ -92,11 +107,21 @@ public class Cerveja {
 	
 	public BigDecimal getComissao() {return comissao;}
 	
-	public void setComissao(BigDecimal comissao) {this.comissao = comissao;}
+	public void setComissao(BigDecimal comissao) {
+		if (comissao != null){
+			this.comissao = comissao;
+		}
+		else this.comissao = BigDecimal.valueOf(0);
+	}
 	
 	public BigDecimal getTeorAlcoolico() {return teorAlcoolico;}
 	
-	public void setTeorAlcoolico(BigDecimal teorAlcoolico) {this.teorAlcoolico = teorAlcoolico;}
+	public void setTeorAlcoolico(BigDecimal teorAlcoolico) {
+		if (teorAlcoolico != null){
+			this.teorAlcoolico = teorAlcoolico;
+		}
+		else this.teorAlcoolico = BigDecimal.valueOf(0);
+	}
 	
 	public Integer getQuantidadeEstoque() {return quantidadeEstoque;}
 	

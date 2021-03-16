@@ -13,18 +13,20 @@
 					<h4 class="modal-tittle"  id="labelCadastroEstilo">Cadastro de Estilo</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal">
+				
+					<div class="alert  alert-danger  hidden  js-mensagem-cadastro-rapido-estilo" role="alert"></div>
+					
+					<form class="form-horizontal" th:action="@{/estilos}">
 						<div class="form-group">
 							<label class="col-sm-2  control-label" for="nomeEstilo">Nome</label>
 							<div class="col-sm-10">
-								<input id="nomeEstilo" type="text" class="form-control">
+								<input id="nomeEstilo" type="text" class="form-control" autofocus="autofocus">
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Salvar Alterações</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				
+					<button type="button" class="btn  btn-primary  js-modal-cadastro-estilo-salvar">Salvar Alterações</button>
+					<button type="button" class="btn  btn-default" data-dismiss="modal">Fechar</button>
 				</div>
 			</div>
 		</div>

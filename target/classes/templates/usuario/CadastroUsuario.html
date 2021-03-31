@@ -21,24 +21,24 @@
 		<form method = "POST" th:object = "${usuario}" class="form-vertical  js-form-loading">
 			<div class="row">	
 				<div class="col-sm-8  form-group">
-					<label for="nome">Nome</label>
+					<label for="nome">Nome*</label>
 					<input id="nome" type="text" class="form-control"/>
 				</div>
 				
 				<div class="col-sm-4  form-group">
-					<label for="dataNascimento">Data de Nascimento</label>
+					<label for="dataNascimento">Data de Nascimento*</label>
 					<input id="dataNascimento" type="text" class="form-control"/>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-sm-4  form-group">
-					<label for="email">Email</label>
+					<label for="email">Email*</label>
 					<input id="email" type="text" class="form-control"/>
 				</div>
 				
 				<div class="col-lg-3  col-sm-12  form-group">
-					<label for="permissao">Permissão</label>
+					<label for="permissao" class="control-label">Permissão*</label>
 					<div>
 						<div class="checkbox  checkbox-inline">
 							<input name="permissao" type="checkbox" class="form-control"/>
@@ -51,7 +51,7 @@
 					</div>
 					
 				</div>
-			
+				
 				<div class="col-lg-3  col-sm-12  form-group">
 					<label for="status">Status</label>
 					<div>
@@ -65,11 +65,11 @@
 			
 			<div class="row">
 				<div class="col-lg-2  col-md-4  col-sm-8  form-group">
-					<label for="senha">Senha</label>
+					<label for="senha">Senha*</label>
 					<input id="senha" type="text" class="form-control"/>
 				</div>
 				<div class="col-lg-2  col-md-4  col-sm-8  form-group">
-					<label for="confirmacaoSenha">Confirmação de Senha</label>
+					<label for="confirmacaoSenha">Confirmação de Senha*</label>
 					<input id="confirmacaoSenha" type="text" class="form-control"/>
 				</div>		
 			</div>

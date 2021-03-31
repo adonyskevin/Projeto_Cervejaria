@@ -1,6 +1,8 @@
 package com.npisistemas.brewer.config.init;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -36,4 +38,10 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		
 		return new Filter[]{characterEncodingFilter};
 	}
+	
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(new MultipartConfigElement(""));
+	}
+	
 }

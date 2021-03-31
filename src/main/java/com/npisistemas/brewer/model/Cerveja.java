@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.thymeleaf.util.StringUtils;
 
 import com.npisistemas.brewer.validation.SKU;
 
@@ -43,7 +44,7 @@ public class Cerveja {
 	private String descricao;
 	
 	@NotNull(message = "Informe o valor")
-	@DecimalMin(value = "0.01", message = "O valor não deve ser maior que R$ 0,01")
+	@DecimalMin(value = "0.01", message = "O valor não deve ser menor que R$ 0,01")
 	@DecimalMax(value = "9999999.99", message = "O valor não deve ser maior que R$ 9.999.999,99")
 	private BigDecimal valor;
 	
@@ -78,6 +79,11 @@ public class Cerveja {
 	@NotNull(message = "Informe o sabor")
 	@Enumerated(EnumType.STRING)
 	private Sabor sabor;
+	
+	private String foto;
+	
+	@Column(name = "content_type")
+	private String contentType;
 	
 // GETTERS AND SETTERS	
 	
@@ -158,4 +164,25 @@ public class Cerveja {
 	public String getDescricao() {return descricao;}
 	
 	public void setDescricao(String descricao) {this.descricao = descricao;}
+	
+	public String getFoto() {
+		return foto;
+	}
+	
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	public String getFotoOuMock() {
+		return !StringUtils.isEmpty(foto) ? foto : "cerveja-mock.png";
+	}
+	
+	public String getContentType() {
+		return contentType;
+	}
+	
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+	
 }

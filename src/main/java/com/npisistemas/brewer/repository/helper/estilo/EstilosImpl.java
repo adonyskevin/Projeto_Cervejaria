@@ -1,4 +1,4 @@
-package com.npisistemas.brewer.repository.helper.cerveja;
+package com.npisistemas.brewer.repository.helper.estilo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,30 +16,29 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.npisistemas.brewer.model.Cerveja;
-import com.npisistemas.brewer.repository.filter.CervejaFilter;
+import com.npisistemas.brewer.model.Estilo;
+import com.npisistemas.brewer.repository.filter.EstiloFilter;
 
-public class CervejasImpl implements CervejasQueries {
-
+public class EstilosImpl implements EstilosQueries {
+	
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Cerveja> filtrar(CervejaFilter filtro, Pageable pageable) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
+	public Page<Estilo> filtrar(EstiloFilter filtro, Pageable pageable) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Estilo.class);
 		
-		int totalRegistrosPorPagina = pageable.getPageSize();
 		int paginaAtual = pageable.getPageNumber();
-		int primeiroRegistro = totalRegistrosPorPagina * paginaAtual;
+		int totalRegistrosPorPagina = pageable.getPageSize();
+		int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
 		
 		criteria.setFirstResult(primeiroRegistro);
 		criteria.setMaxResults(totalRegistrosPorPagina);
 		
 		Sort sort = pageable.getSort();
-		
-		if (sort != null){
+		if (sort != null) {
 			Sort.Order order = sort.iterator().next();
 			String property = order.getProperty();
 			criteria.addOrder(order.isAscending() ? Order.asc(property) : Order.desc(property));
@@ -49,49 +48,24 @@ public class CervejasImpl implements CervejasQueries {
 		
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
 	}
-
-	private Long total(CervejaFilter filtro) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
+	
+	private Long total(EstiloFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Estilo.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
 	}
-	
-	private void adicionarFiltro(CervejaFilter filtro, Criteria criteria) {
+
+	private void adicionarFiltro(EstiloFilter filtro, Criteria criteria) {
 		if (filtro != null) {
-			if (!StringUtils.isEmpty(filtro.getSku())) {
-				criteria.add(Restrictions.eq("sku", filtro.getSku()));
+			if (!StringUtils.isEmpty(filtro.getCodigo())) {
+				criteria.add(Restrictions.eq("codigo", filtro.getCodigo()));
 			}
 			
 			if (!StringUtils.isEmpty(filtro.getNome())) {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}
-
-			if (isEstiloPresente(filtro)) {
-				criteria.add(Restrictions.eq("estilo", filtro.getEstilo()));
-			}
-
-			if (filtro.getSabor() != null) {
-				criteria.add(Restrictions.eq("sabor", filtro.getSabor()));
-			}
-
-			if (filtro.getOrigem() != null) {
-				criteria.add(Restrictions.eq("origem", filtro.getOrigem()));
-			}
-
-			if (filtro.getValorDe() != null) {
-				criteria.add(Restrictions.ge("valor", filtro.getValorDe()));
-			}
-
-			if (filtro.getValorAte() != null) {
-				criteria.add(Restrictions.le("valor", filtro.getValorAte()));
-			}
 		}
-	}
-	
-
-	private boolean isEstiloPresente(CervejaFilter filtro) {
-		return filtro.getEstilo() != null && filtro.getEstilo().getcodigo() != null;
 	}
 
 }

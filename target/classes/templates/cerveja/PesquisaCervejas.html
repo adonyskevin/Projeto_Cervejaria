@@ -6,7 +6,7 @@
 	xmlns:brewer="http://brewer.com">
 	
 <head>
-	<title>Pesquisa de cervejas</title>
+	<title>Pesquisa de Cervejas</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-10">
-					<h1>Pesquisa de cervejas</h1>
+					<h1>Pesquisa de Cervejas</h1>
 				</div>
 				
 				<div class="col-sm-2">
@@ -96,11 +96,21 @@
 				<thead>
 					<tr>
 						<th class="table-cervejas-col-foto"></th>
-						<th class="table-cervejas-col-sku">SKU</th>
-						<th class="table-cervejas-col-nome">Nome</th>
-						<th class="table-cervejas-col-estilo">Estilo</th>
-						<th class="table-cervejas-col-origem">Origem</th>
-						<th class="table-cervejas-col-valor">Valor</th>
+						<th class="table-cervejas-col-sku">
+							<brewer:order page="${pagina}" field="sku" text="SKU"/>
+						</th>
+						<th class="table-cervejas-col-nome">
+							<brewer:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						<th class="table-cervejas-col-estilo">
+							<brewer:order page="${pagina}" field="estilo" text="Estilo"/>
+						</th>
+						<th class="table-cervejas-col-origem">
+							<brewer:order page="${pagina}" field="origem" text="Origem"/>
+						</th>
+						<th class="table-cervejas-col-valor">
+							<brewer:order page="${pagina}" field="valor" text="Valor"/>
+						</th>
 						<th class="table-cervejas-col-acoes"></th>
 					</tr>
 				</thead>

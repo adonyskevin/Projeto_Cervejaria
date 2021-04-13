@@ -3,6 +3,7 @@
 	xmlns = "http://www.w3.org/1999/xhtml"
     xmlns:th = "http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:data="http://www.thymeleaf.org/extras/data"
     layout:decorator="'layout/LayoutPadrao'">
 <head>
 	<title>Cadastro de Cliente</title>
@@ -27,31 +28,29 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-lg-4  col-sm-6  form-group">
-					<label for="tipoPessoa">Tipo Pessoa*</label>
+				<div class="form-group  col-sm-4">
+					<label>Tipo pessoa*</label> 
 					<div>
-						<div class="radio radio-inline">
-							<input type="radio" name="tipoPessoa">
-							<label for="tipoPessoa">Física</label>
-						</div>
-						<div class="radio radio-inline">
-							<input type="radio" name="tipoPessoa">
-							<label for="tipoPessoa">Jurídica</label>
-						</div> 
+						<th:block th:each="tipoPessoa : ${tiposPessoa}">
+							<div class="radio radio-inline">
+								<input th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa" type="radio"
+									name="tipoPessoa" data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}">
+								<label class="control-label" th:for="|id_${tipoPessoa}|" th:text="${tipoPessoa.descricao}">Física</label>
+							</div>
+						</th:block>
 					</div>
 				</div>
 				
-				<div class="col-sm-12  col-lg-8  form-group">
-					<label for="numeroInscricao">CPF/CNPJ*</label>
-					<input id="numeroInscricao" type="text" class="form-control"/>
+				<div class="form-group  col-sm-8" >
+					<label for="cpfOuCnpj">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="cpfOuCnpj" disabled/>
 				</div>
-				
 			</div>
 			
 			<div class="row">
 				<div class="col-sm-4  form-group">
 					<label for="telefone">Telefone</label>
-					<input id="telefone" type="text" class="form-control"/>
+					<input id="telefone" type="text" class="form-control  js-phone-number"/>
 				</div>
 				
 				<div class="col-sm-8  form-group">
@@ -80,7 +79,7 @@
 			<div class="row">
 				<div class="col-sm-4  form-group">
 					<label for="cep">CEP</label>
-					<input id="cep" type="text" class="form-control"/>
+					<input id="cep" type="text" class="form-control  js-cep"/>
 				</div>
 				
 				<div class="col-sm-4  form-group">
@@ -104,7 +103,12 @@
 		</form>
 	</div>
 
-</section>					
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/cliente.mascara-cpf-cnpj.js}"></script>
+	<!-- <script th:src="@{/javascripts/mascara-cep.js}"></script> -->
+</th:block>					
 
 </body>
 

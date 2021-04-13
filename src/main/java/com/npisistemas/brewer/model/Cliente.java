@@ -1,5 +1,8 @@
 package com.npisistemas.brewer.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -8,8 +11,9 @@ public class Cliente {
 	@NotBlank(message = "Informe o nome")
 	private String nome;
 	
-	@NotBlank(message = "Informe F para pessoa Física e J para Pessoa Jurídica")
-	private char tipoCadastro;
+	@NotNull(message = "Informe o tipo de pessoa")
+	@Enumerated(EnumType.STRING)
+	private TipoPessoa tipoPessoa;
 	
 	@NotBlank
 	private String numeroInscricao;
@@ -39,12 +43,6 @@ public class Cliente {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public char getTipoCadastro() {
-		return tipoCadastro;
-	}
-	public void setTipoCadastro(char tipoCadastro) {
-		this.tipoCadastro = tipoCadastro;
 	}
 	public String getNumeroInscricao() {
 		return numeroInscricao;

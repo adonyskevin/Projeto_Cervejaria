@@ -4,7 +4,8 @@
     xmlns:th = "http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     xmlns:data="http://www.thymeleaf.org/extras/data"
-    layout:decorator="'layout/LayoutPadrao'">
+    layout:decorator="'layout/LayoutPadrao'"
+    xmlns:brewer="http://brewer.com">
 <head>
 	<title>Cadastro de Cliente</title>
 </head>
@@ -82,11 +83,22 @@
 					<input id="cep" type="text" class="form-control  js-cep"/>
 				</div>
 				
-				<div class="col-sm-4  form-group">
+				<!-- <div class="col-sm-4  form-group">
 					<label for="estado">Estado*</label>
 					<select id="estado" class="form-control">
 						<option value=''>Selecione um Estado</option>
 					</select>
+				</div> 
+				
+				brewer:classforerror="estado"
+				-->
+				
+				<div class="col-sm-4  form-group">
+					<label for="estado" class="control-label">Estado*</label>
+						<select id="estado" class="form-control">
+							<option value=''>Selecione um estilo</option>
+							<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+						</select>
 				</div>
 				
 				<div class="col-sm-4  form-group">

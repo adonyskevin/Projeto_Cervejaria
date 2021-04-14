@@ -32,8 +32,8 @@ public class Cliente {
 	@Size(max = 10, min = 8)
 	private String cep;
 	
-	@Size(max = 25)
-	private String estado;
+	@NotNull(message = "Informe um estado")
+	private Estado estado;
 	
 	@Size(max = 25)
 	private String cidade;
@@ -85,12 +85,6 @@ public class Cliente {
 	}
 	public void setCep(String cep) {
 		this.cep = cep;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 	public String getCidade() {
 		return cidade;

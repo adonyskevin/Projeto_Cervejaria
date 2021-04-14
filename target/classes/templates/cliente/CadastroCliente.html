@@ -83,29 +83,24 @@
 					<input id="cep" type="text" class="form-control  js-cep"/>
 				</div>
 				
-				<!-- <div class="col-sm-4  form-group">
-					<label for="estado">Estado*</label>
-					<select id="estado" class="form-control">
-						<option value=''>Selecione um Estado</option>
-					</select>
-				</div> 
-				
-				brewer:classforerror="estado"
-				-->
-				
 				<div class="col-sm-4  form-group">
 					<label for="estado" class="control-label">Estado*</label>
-						<select id="estado" class="form-control">
-							<option value=''>Selecione um estilo</option>
-							<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
-						</select>
+					<select id="estado" class="form-control">
+						<option value=''>Selecione um estilo</option>
+						<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+					</select>
 				</div>
 				
-				<div class="col-sm-4  form-group">
-					<label for="cidade">Cidade*</label>
-					<select id="cidade" class="form-control">
-						<option value=''>Selecione uma cidade</option>
-					</select>
+				<div class="form-group  col-sm-4">
+					<label  for="cidade">Cidade*</label>
+					<div class="bw-field-action">
+						<select id="cidade" class="form-control" data:url="@{/cidades}">
+						</select>
+						
+						<div class="bw-field-action__icon  js-img-loading" style="display: none">
+							<img th:src="@{/images/mini-loading.gif}"/>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -119,7 +114,7 @@
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/cliente.mascara-cpf-cnpj.js}"></script>
-	<!-- <script th:src="@{/javascripts/mascara-cep.js}"></script> -->
+	<script th:src="@{/javascripts/cliente.combo-estado-cidade.js}"></script>
 </th:block>					
 
 </body>

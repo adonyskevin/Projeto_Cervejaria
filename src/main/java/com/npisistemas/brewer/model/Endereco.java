@@ -3,6 +3,7 @@ package com.npisistemas.brewer.model;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Embeddable
 public class Endereco {
@@ -20,6 +21,9 @@ public class Endereco {
 	@ManyToOne
 	@JoinColumn(name = "codigo_cidade")
 	private Cidade cidade;
+	
+	@Transient
+	private Estado estado;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -61,4 +65,11 @@ public class Endereco {
 		this.cidade = cidade;
 	}
 
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 }

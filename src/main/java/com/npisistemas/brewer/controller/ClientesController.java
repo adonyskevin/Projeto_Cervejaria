@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.npisistemas.brewer.model.Cliente;
 import com.npisistemas.brewer.model.TipoPessoa;
 import com.npisistemas.brewer.repository.Estados;
+import com.npisistemas.brewer.service.CadastroClienteService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -21,6 +22,9 @@ public class ClientesController {
 	
 	@Autowired
 	private Estados estados;
+	
+	@Autowired
+	private CadastroClienteService cadastroClienteService;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo(Cliente cliente) {
@@ -36,7 +40,7 @@ public class ClientesController {
 			return novo(cliente);
 		}
 		
-		//cadastroCervejaService.salvar(cerveja);
+		cadastroClienteService.salvar(cliente);
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 		return new ModelAndView("redirect:/clientes/novo");
 	}

@@ -1,14 +1,16 @@
 package com.npisistemas.brewer.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable {
 
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	private String logradouro;
 	
@@ -72,4 +74,5 @@ public class Endereco {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
 }

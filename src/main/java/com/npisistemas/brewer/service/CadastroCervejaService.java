@@ -24,6 +24,4 @@ public class CadastroCervejaService {
 		
 		publisher.publishEvent(new CervejaSalvaEvent(cerveja));
 	}
-	
-	
 }

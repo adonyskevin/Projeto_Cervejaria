@@ -33,12 +33,7 @@
 		
 	
 		<form method = "POST" th:object = "${cerveja}" class="form-vertical  js-form-loading">
-			
-			<!-- <th:block th:include="fragments/MensagemSucesso"></th:block>
-			<th:block th:include="fragments/MensagemErroValidacao"></th:block>  -->
 			<brewer:message/>
-			
-				
 			<div class="row">
 				<div class="col-sm-2  form-group" brewer:classforerror="sku">
 					<label for="sku" class="control-label">SKU*</label>

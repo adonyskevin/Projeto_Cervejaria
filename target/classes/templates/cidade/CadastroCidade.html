@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt"
-	xmlns = "http://www.w3.org/1999/xhtml"
-    xmlns:th = "http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="'layout/LayoutPadrao'">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:brewer="http://brewer.com"
+	layout:decorate="~{layout/LayoutPadrao}">
+	
 <head>
 	<title>Cadastro de Cidade</title>
 </head>
 <body>
 
 <section layout:fragment="conteudo">
-	<div class="page-header">
+	<div class="page-header">	
 		<div class="container-fluid">
-			<h1>Cadastro de Cidade</h1>
+			<div class="row">
+				<div class="col-sm-10">
+					<h1>Cadastro de Cidade</h1>
+				</div>
+				
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/cidades}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisar</span>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
 	<div class="container-fluid">
 		
-		<form method = "POST" th:object = "${cidade}" class="form-vertical  js-form-loading">
+		<form method="POST" th:object="${cidade}" th:action="@{/cidades/novo}">
+			<brewer:message/>
 			<div class="row">	
-				<div class="col-sm-4  form-group">
-					<label for="estado">Estado*</label>
-					<select id="estado" class="form-control">
-						<option value=''>Selecione um Estado</option>
-					</select>
+				<div class="form-group  col-sm-4  bw-required" brewer:classforerror="estado">
+					<label for="estado">Estado</label>
+					<select id="estado" class="form-control" th:field="*{estado}">
+	                    <option value="">Selecione o estado</option>
+	                    <option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+	                </select>
 				</div>
 				
-				<div class="col-sm-8  form-group">
-					<label for="nome">Nome*</label>
-					<input id="nome" type="text" class="form-control"/>
+				<div class="form-group  col-sm-8  bw-required" brewer:classforerror="nome">
+					<label for="nome" class="control-label">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>
 				</div>
 			</div>
 			

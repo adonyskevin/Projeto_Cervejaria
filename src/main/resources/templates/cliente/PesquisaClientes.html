@@ -30,61 +30,21 @@
 	</div>
 	
 	<div class="container-fluid">
-		<form method="GET" th:object="${cervejaFilter}">
+		<form method="GET" th:object="${clienteFilter}">
 			<div class="row">
-				<div class="form-group  col-sm-6">
-					<label class="control-label" for="sku">SKU</label>
-					<input type="text" class="form-control" id="sku" autofocus="autofocus" th:field="*{sku}"/>
+				<div class="form-group  col-sm-2">
+					<label class="control-label" for="codigo">Código</label>
+					<input type="text" class="form-control" id="codigo" autofocus="autofocus" th:field="*{codigo}"/>
 				</div>
 				
-				<div class="form-group  col-sm-6" >
+				<div class="form-group  col-sm-7" >
 					<label class="control-label" for="nome">Nome</label>
 					<input type="text" class="form-control" id="nome" th:field="*{nome}"/>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="form-group  col-sm-6">
-					<label class="control-label" for="estilo">Estilo</label>
-					<select id="estilo" class="form-control" th:field="*{estilo}">
-	                    <option value="">Todos os estilos</option>
-	                    <option th:each="estilo : ${estilos}" th:text="${estilo.nome}" th:value="${estilo.codigo}"></option>
-	                </select>
-				</div>
 				
-				<div class="form-group  col-sm-6">
-					<label class="control-label" for="sabor">Sabor</label> 
-					<select id="sabor" class="form-control" th:field="*{sabor}">
-	                    <option value="">Todos os sabores</option>
-	                    <option th:each="sabor : ${sabores}" th:value="${sabor}" th:text="${sabor.descricao}"></option>
-	                </select>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="form-group  col-sm-6">
-					<label class="control-label">Origem</label> 
-					<div>
-	  					<th:block th:each="origem : ${origens}">
-	  						<div class="radio  radio-inline">
-		    					<input th:id="|id_${origem}|" type="radio" th:value="${origem}" name="origem" th:field="*{origem}"/>
-		    					<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
-	    					</div>
-	  					</th:block>
-	  					<div class="radio  radio-inline">
-		    				<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem"/>
-		    				<label for="todasOrigens" >Todas</label>
-	    				</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6  form-group">
-					<label for="valorDe">Valor unitário</label>
-					<div class="form-inline">
-						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorDe" th:field="*{valorDe}"/>
-						<label for="valorAte" class="aw-form-label-between">até</label>
-						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorAte" th:field="*{valorAte}"/>
-					</div>
+				<div class="form-group  col-sm-3" >
+					<label class="control-label" for="cpfOuCnpj">CPF/CNPJ</label>
+					<input type="text" class="form-control" id="cpfOuCnpj" th:field="*{cpfOuCnpj}"/>
 				</div>
 			</div>
 			
@@ -95,37 +55,33 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<th class="table-cervejas-col-foto"></th>
-						<th class="table-cervejas-col-sku">
-							<brewer:order page="${pagina}" field="sku" text="SKU"/>
+						<th class="table-clientes-col-codigo">
+							<brewer:order page="${pagina}" field="codigo" text="Código"/>
 						</th>
-						<th class="table-cervejas-col-nome">
+						<th class="table-clientes-col-nome">
 							<brewer:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
-						<th class="table-cervejas-col-estilo">
-							<brewer:order page="${pagina}" field="estilo" text="Estilo"/>
+						<th class="table-clientes-col-tipoPessoa">
+							<brewer:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa"/>
 						</th>
-						<th class="table-cervejas-col-origem">
-							<brewer:order page="${pagina}" field="origem" text="Origem"/>
+						<th class="table-clientes-col-cpfOuCnpj">
+							<brewer:order page="${pagina}" field="cpfOuCnpj" text="CPF/CNPJ"/>
 						</th>
-						<th class="table-cervejas-col-valor">
-							<brewer:order page="${pagina}" field="valor" text="Valor"/>
-						</th>
-						<th class="table-cervejas-col-acoes"></th>
+						<th class="table-clientes-col-telefone">Telefone</th>
+						<th class="table-clientes-col-cidade-estado">Cidade/Estado</th>
+						<th class="table-clientes-col-acoes"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr th:each="cerveja : ${pagina.conteudo}">
-						<td class="text-center">
-							<img th:src="@{/fotos/thumbnail.{foto}(foto=${cerveja.fotoOuMock})}" class="img-responsive"/>
-						</td>
-						<td class="text-center" th:text="${cerveja.sku}">AA1234</td>
-						<td th:text="${cerveja.nome}">Cerveja Stella</td>
-						<td th:text="${cerveja.estilo.nome}">Lager</td>
-						<td th:text="${cerveja.origem.descricao}">Internacional</td>
-						<td class="text-right" th:text="|R$ ${cerveja.valor}|">R$ 8.00</td>
-						<td class="text-center">
+					<tr th:each="cliente : ${pagina.conteudo}">
+						<td class="text-left" th:text="${cliente.codigo}">1</td>
+						<td th:text="${cliente.nome}">Nome Cliente</td>
+						<td th:text="${cliente.tipoPessoa}">Física</td>
+						<td th:text="${cliente.cpfOuCnpj}">999.999.999-99</td>
+						<td th:text="${cliente.telefone}">999999999</td>
+						<td th:text="${cliente.endereco.nomeCidadeEstado}">999999999</td>
+						<td class="text-right">
 							<a class="btn  btn-link  btn-xs" title="Editar"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>

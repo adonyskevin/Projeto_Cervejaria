@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -48,6 +50,7 @@ public class CidadesController {
 		return mv;
 	}
 	
+	@CacheEvict(value = "cidades", key = "#cidade.estado.codigo", condition = "#cidade.temEstado()")
 	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Cidade cidade, BindingResult result, Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
@@ -65,6 +68,7 @@ public class CidadesController {
 		return new ModelAndView("redirect:/cidades/novo");
 	}
 	
+	@Cacheable(value = "cidades", key = "#codigoEstado")
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Cidade> pesquisarPorCodigoEstado(
 			@RequestParam(name = "estado", defaultValue = "-1") Long codigoEstado) {

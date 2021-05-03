@@ -36,7 +36,7 @@
 			<brewer:message/>
 			<div class="row">	
 				<div class="form-group  col-sm-4  bw-required" brewer:classforerror="estado">
-					<label for="estado">Estado</label>
+					<label for="estado" class="control-label">Estado</label>
 					<select id="estado" class="form-control" th:field="*{estado}">
 	                    <option value="">Selecione o estado</option>
 	                    <option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>

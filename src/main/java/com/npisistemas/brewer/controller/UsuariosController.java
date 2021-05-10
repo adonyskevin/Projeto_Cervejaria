@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.npisistemas.brewer.model.Usuario;
 import com.npisistemas.brewer.service.CadastroUsuarioService;
+import com.npisistemas.brewer.service.exception.EmailJaCadastradoException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -27,8 +28,6 @@ public class UsuariosController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(Usuario usuario) {
 		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
-		//mv.addObject("tiposPessoa", TipoPessoa.values());
-		//mv.addObject("estados", estados.findAll());
 		return mv;
 	}
 	
@@ -38,7 +37,14 @@ public class UsuariosController {
 			return novo(usuario);
 		}
 		
-		cadastroUsuarioService.salvar(usuario);
+		try{
+			cadastroUsuarioService.salvar(usuario);
+		}catch (EmailJaCadastradoException e){
+			result.rejectValue("email", e.getMessage(), e.getMessage());
+			return novo(usuario);
+		}
+		
+		//cadastroUsuarioService.salvar(usuario);
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 		return new ModelAndView("redirect:/usuarios/novo");
 	}

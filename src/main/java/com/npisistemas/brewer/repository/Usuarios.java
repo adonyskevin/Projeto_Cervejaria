@@ -10,6 +10,6 @@ import com.npisistemas.brewer.model.Usuario;
 @Repository
 public interface Usuarios extends JpaRepository<Usuario, Long> {
 
-	Optional<Usuario> findByEmailIgnoreCase(String email);
+	Optional<Usuario> findByEmail(String email);
 
 }

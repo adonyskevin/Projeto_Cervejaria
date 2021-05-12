@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.npisistemas.brewer.model.Usuario;
+import com.npisistemas.brewer.repository.Grupos;
 import com.npisistemas.brewer.service.CadastroUsuarioService;
 import com.npisistemas.brewer.service.exception.EmailJaCadastradoException;
+import com.npisistemas.brewer.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -22,12 +24,13 @@ public class UsuariosController {
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
 	
-	//@Autowired
-	//private Usuarios usuarios;
+	@Autowired
+	private Grupos grupos;
 
 	@RequestMapping("/novo")
 	public ModelAndView novo(Usuario usuario) {
 		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
+		mv.addObject("grupos", grupos.findAll());
 		return mv;
 	}
 	
@@ -42,9 +45,11 @@ public class UsuariosController {
 		}catch (EmailJaCadastradoException e){
 			result.rejectValue("email", e.getMessage(), e.getMessage());
 			return novo(usuario);
+		}catch (SenhaObrigatoriaUsuarioException e){
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
+			return novo(usuario);
 		}
 		
-		//cadastroUsuarioService.salvar(usuario);
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 		return new ModelAndView("redirect:/usuarios/novo");
 	}

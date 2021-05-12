@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -38,25 +39,26 @@ public class Usuario implements Serializable{
 	@Email(message = "Email inválido")
 	private String email;
 	
-	//@NotBlank(message = "Informe a data de nascimento")
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 	
-	@NotBlank(message = "Informe a senha")
 	private String senha;
 	
-	@NotBlank(message = "Informe a confirmação de senha")
 	@Transient
 	private String confirmacaoSenha;
 	
 	private Boolean ativo;
 	
-	//@NotNull(message = "Selecione ao menos um grupo")
+	@Size(min = 1, message = "Selecione ao menos um grupo")
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo",
 					joinColumns = @JoinColumn(name = "codigo_usuario"),
 					inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))
 	private List<Grupo> grupos;
+	
+	public Boolean isNovo(){
+		return codigo == null;
+	}
 
 	public String getNome() {
 		return nome;
@@ -106,6 +108,23 @@ public class Usuario implements Serializable{
 		this.codigo = codigo;
 	}
 	
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -129,21 +148,5 @@ public class Usuario implements Serializable{
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
-	}
-
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-
-	public String getConfirmacaoSenha() {
-		return confirmacaoSenha;
-	}
-
-	public void setConfirmacaoSenha(String confirmacaoSenha) {
-		this.confirmacaoSenha = confirmacaoSenha;
 	}
 }

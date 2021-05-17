@@ -1,10 +1,8 @@
 package com.npisistemas.brewer.config.init;
 
-import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.npisistemas.brewer.config.JPAConfig;
@@ -28,16 +26,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
-	}
-	
-	//Solucionar possíveis problemas de acentuação
-	@Override
-	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding("UTF-8");
-		characterEncodingFilter.setForceEncoding(true);
-		
-		return new Filter[]{characterEncodingFilter};
 	}
 	
 	@Override

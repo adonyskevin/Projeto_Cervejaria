@@ -60,6 +60,12 @@ public class CidadesImpl implements CidadesQueries {
 				temFiltro = true;
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}
+			
+			if (filtro.getEstado() != null) {
+				temFiltro = true;
+				criteria.add(Restrictions.eq("estado", filtro.getEstado()));
+			}
+			
 		}
 		if (!temFiltro){
 			criteria.addOrder(Order.asc("codigo"));

@@ -2,8 +2,10 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="'layout/LayoutPadrao'"
-	xmlns:brewer="http://brewer.com">
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	
 <head>
 	<title>Pesquisa de Cidades</title>
@@ -18,7 +20,7 @@
 					<h1>Pesquisa de Cidades</h1>
 				</div>
 				
-				<div class="col-xs-2">
+				<div class="col-xs-2" sec:authorize-url="/cidades/novo">
 					<div class="aw-page-header-controls">
 						<a class="btn  btn-default" th:href="@{/cidades/novo}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova cidade</span>
@@ -67,7 +69,7 @@
 						<th class="table-cidades-col-estado">
 							<brewer:order page="${pagina}" field="estado" text="Estado"/>
 						</th>
-						<th class="table-cidades-col-acoes"></th>
+						<th class="table-col-acoes" sec:authorize-url="/cidades/nova"></th>
 					</tr>
 				</thead>
 				
@@ -77,10 +79,10 @@
 						<td th:text="${cidade.nome}">Nome Cidade</td>
 						<td th:text="${cidade.estado.nome}">NomeEstado</td>
 						<td class="text-right">
-							<a class="btn  btn-link  btn-xs" title="Editar"> 
+							<a class="btn  btn-link  btn-xs" title="Editar" sec:authorize-url="/cidades/novo"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
-							<a class="btn  btn-link  btn-xs" title="Excluir">
+							<a class="btn  btn-link  btn-xs" title="Excluir" sec:authorize-url="/cidades/novo">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>

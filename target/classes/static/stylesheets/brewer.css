@@ -157,6 +157,12 @@
 	text-align: right;
 }
 
+/* Colunas - Pesquisa de usuários */
+.table-usuarios-col-status {
+	width: 30px;
+	text-align: center;
+}
+
 /*
 ######################################
 # CUSTOMIZAÇÃO DE COMPONENTES

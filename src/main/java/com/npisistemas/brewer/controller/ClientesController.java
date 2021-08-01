@@ -1,11 +1,14 @@
 package com.npisistemas.brewer.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,5 +74,11 @@ public class ClientesController {
 				, httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
+	}
+	
+	@RequestMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+	public List<Cliente> pesquisar(String nome){
+		
+		return clientes.findByNomeStartingWithIgnoreCase(nome);
 	}
 }

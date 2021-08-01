@@ -42,7 +42,6 @@ Brewer.PesquisaRapidaCliente = (function() {
 	}
 	
 	return PesquisaRapidaCliente;
-	
 }());
 
 $(function() {
